@@ -1,1 +1,1 @@
-https://github.com/belensrz/Ta-te-ti
+https://belensrz.github.io/Ta-te-ti/
