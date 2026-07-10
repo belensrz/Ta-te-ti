@@ -36,14 +36,14 @@ h2 {
 
 .block {
   display: flex;
-  width: 100 px;
-  height: 100 px;
+  width: 100px;
+  height: 100px;
   align-items: center;
   justify-content: center;
-  font-size: 3 rem;
+  font-size: 3rem;
   font-weight: bold;
-  border: 3 px pink;
-  transition: background 0.2 s ease-in-out;
+  border: 3px solid pink;
+  transition: background 0.2s ease-in-out;
 }
 
 .block:hover {
