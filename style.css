@@ -111,7 +111,7 @@ button: hover {
   color: yellow;
 }
 
-@medaia only screen and (max-width: 600 px) {
+@media only screen and (max-width: 600 px) {
   h1 {
     font-size: 3 rem;
     margin-bottom: 0.5 em;
