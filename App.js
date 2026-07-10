@@ -1,4 +1,4 @@
-const player = "C";
+const player = "O";
 const computer = "X";
 
 let board_full = false;
