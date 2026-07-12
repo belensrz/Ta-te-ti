@@ -25,6 +25,10 @@ h2 {
   margin-bottom: 0.5em;
 }
 
+#winner {
+  transition: color 0.3s ease;
+}
+
 .play-area {
   display: grid;
   box-shadow: 0 0 20px rgba(247, 160, 184, 0.85);
@@ -54,6 +58,11 @@ h2 {
   background: #fae9d7;
   }
 
+.win {
+  background: #faf5ec;
+    color: #f7a0b8;
+}
+
 .win:hover {
   background: #faf5ec;
 }
@@ -76,14 +85,14 @@ button {
 }
 
 button:hover {
-  cursor: pointer,
+  cursor: pointer;
   background: pink;
   color: white;
 }
 
 .playerWin { color: green; }
 .computerWin { color: red; }
-.draw { color: yellow; }
+.tie { color: yellow; }
 
 @media only screen and (max-width: 600px) {
   h1 {
