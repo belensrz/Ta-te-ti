@@ -10,7 +10,7 @@ const winner_statement = document.getElementById("winner");
 check_board_complete = () => {
  let flag = true;
  play_board.forEach(element => {
-  if (element != player && elemnet != computer) {
+  if (element != player && element != computer) {
    flag = false;
   }
  });
@@ -34,12 +34,15 @@ const check_match = () => {
    return play_board[i];
   }
  }
+ 
  for (i = 0; i < 3; i++) {
+  if (check_line(i, i + 3, i + 6)) {
   document.querySelector(`#block_${i}`).classList.add("win");
   document.querySelector(`#block_${i + 3}`).classList.add("win");
   document.querySelector(`#block_${i + 6}`).classList.add("win");
   return play_board[i];
  }
+  
 }
 if (check_line(0, 4, 8)) {
  document.querySelector(`#block_0`).classList.add("win");
@@ -47,36 +50,39 @@ if (check_line(0, 4, 8)) {
  document.querySelector(`#block_8`).classList.add("win");
  return play_board[0];
 }
+ 
 if (check_line(2, 4, 6)) {
  document.querySelector(`#block_2`).classList.add("win");
  document.querySelector(`#block_4`).classList.add("win");
  document.querySelector(`#block_6`).classList.add("win");
  return play_board[2];
 }
+ 
 return "";
 };
 
 const check_for_winner = () => {
  let res = check_match()
  if (res == player) {
-  winner.innertext = "Winner is Player";
-  winner.classList.add("playerWin");
+  winner_statement.innerText = "Winner is Player";
+  winner_statement.classList.add("playerWin");
   board_full = true
  } else if (res == computer) {
-  winner.innerText = "Winner is computer";
-  winner.classList.add("computerWin");
+  winner_statement.innerText = "Winner is computer";
+  winner_statement.classList.add("computerWin");
   board_full = true
  } else if (board_full) {
-  winner.innerText = "Draw";
-  winner.classList.add("draw");
+  winner_statement.innerText = "Draw";
+  winner_statement.classList.add("draw");
  }
 };
 
 const render_board = () => {
- board_container.innerHTML = ""
+ board_container.innerHTML = "";
  play_board.forEach((e, i) => {
   board_container.innerHTML += `<div id="block_${i}" class="block"onclick="addPlayerMove (${i})">${play_board[i]}</div>`
-  if (e == player || e == computer) {
+ 
+  if (e === player || e === computer) {
    document.querySelector(`#block_${i}`).classList.add("occupied");
   }
  });
