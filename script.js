@@ -80,6 +80,21 @@ const check_for_winner = () => {
  }
 };
 
+const player_click = (index) => {
+ if (player_board[index] === "" && !board_full) {
+  play_board[index] = player;
+
+  const block = document.querySelector(`#block_${index}`);
+  block.innerText = player;
+  block.classList.add("occupied");
+
+  check_for_winner();
+  if (!board_full) {
+  setTimeout(computer_turn, 400);
+  }
+ }
+};
+
 const computer_turn = () => {
  if (board_full) return;
 
@@ -88,8 +103,8 @@ const computer_turn = () => {
   if (val === "") empty_cells.push(idx);
  });
 
- if (empty_cells.lenght > 0) {
-  const ramdom_idx = empty_cells[Math.floor(Math.random() * empty_cells.lenght)];
+ if (empty_cells.length > 0) {
+  const random_idx = empty_cells[Math.floor(Math.random() * empty_cells.lenght)];
   play_board[random_idx] = computer;
 
   const block = document.querySelector(`#block_${random_idx}`);
@@ -97,8 +112,22 @@ const computer_turn = () => {
   block.classList.add("occupied");
 
   check_for_winner();
-  setTimeout(computer_turn, 400);
  }
+};
+
+const reset_board = () => {
+ play_board = ["", "", "", "", "", "", "", "", ""];
+ board_full = false;
+ winner_statement.innerText = "";
+ winner_statement.className = "";
+
+ play_board.forEach((_, index) => {
+ const block = document.querySelector(`#block_${index}`);
+ if (block) {
+  block.innerText = "";
+  block.classList.remove("win", "occupied");
+ }
+ });
 };
 
 play_board.forEach((_, index) => {
