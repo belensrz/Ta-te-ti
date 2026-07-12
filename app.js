@@ -7,27 +7,27 @@ let play_board = ["", "", "", "", "", "", "", "", ""];
 const board_container = document.querySelector(".play-area");
 const winner_statement = document.getElementById("winner");
 
-check_board_complete = () => {
+const check_board_complete = () => {
  let flag = true;
  play_board.forEach(element => {
-  if (element != player && element != computer) {
+  if (element !== player && element !== computer) {
    flag = false;
   }
  });
  board_full = flag;
 };
 
-const check_line = (a, b, c) =>{
+const check_line = (a, b, c) => {
  return (
-  play_board[a] == play_board[b] &&
-  play_board[b] == play_board[c] &&
-  (play_board[a] == player || play_board[a] == computer)
+  play_board[a] === play_board[b] &&
+  play_board[b] === play_board[c] &&
+  (play_board[a] === player || play_board[a] == computer)
   );
 };
 
 const check_match = () => {
- for (i = 0; i < 9; i += 3) {
-  if (check_line(i, i + 1, i+2)) {
+ for (let i = 0; i < 9; i += 3) {
+  if (check_line(i, i + 1, i + 2)) {
    document.querySelector(`#block_${i}`).classList.add("win");
    document.querySelector(`#block_${i + 1}`).classList.add("win");
    document.querySelector(`#block_${i + 2}`).classList.add("win");
@@ -35,15 +35,15 @@ const check_match = () => {
   }
  }
  
- for (i = 0; i < 3; i++) {
+ for (let i = 0; i < 3; i++) {
   if (check_line(i, i + 3, i + 6)) {
   document.querySelector(`#block_${i}`).classList.add("win");
   document.querySelector(`#block_${i + 3}`).classList.add("win");
   document.querySelector(`#block_${i + 6}`).classList.add("win");
   return play_board[i];
  }
-  
 }
+ 
 if (check_line(0, 4, 8)) {
  document.querySelector(`#block_0`).classList.add("win");
  document.querySelector(`#block_4`).classList.add("win");
@@ -62,67 +62,51 @@ return "";
 };
 
 const check_for_winner = () => {
- let res = check_match()
- if (res == player) {
+ let res = check_match();
+ if (res === player) {
   winner_statement.innerText = "Winner is Player";
   winner_statement.classList.add("playerWin");
-  board_full = true
- } else if (res == computer) {
+  board_full = true;
+ } else if (res === computer) {
   winner_statement.innerText = "Winner is computer";
   winner_statement.classList.add("computerWin");
-  board_full = true
- } else if (board_full) {
-  winner_statement.innerText = "Draw";
-  winner_statement.classList.add("draw");
- }
-};
-
-const render_board = () => {
- board_container.innerHTML = "";
- play_board.forEach((e, i) => {
-  board_container.innerHTML += `<div id="block_${i}" class="block"onclick="addPlayerMove (${i})">${play_board[i]}</div>`
- 
-  if (e === player || e === computer) {
-   document.querySelector(`#block_${i}`).classList.add("occupied");
+  board_full = true;
+ } else {
+  check_board_complete();
+  if (board_full) {
+  winner_statement.innerText = "It's a Tie";
+  winner_statement.classList.add("tie");
   }
+ }
+};
+
+const computer_turn = () => {
+ if (board_full) return;
+
+ let empty_cells = [];
+ play_board.forEach((val, idx) => {
+  if (val === "") empty_cells.push(idx);
  });
-};
 
-const game_loop = () => {
- render_board();
- check_board_complete();
- check_for_winner();
-}
+ if (empty_cells.lenght > 0) {
+  const ramdom_idx = empty_cells[Math.floor(Math.random() * empty_cells.lenght)];
+  play_board[random_idx] = computer;
 
-const addPlayerMove = e => {
- if (!board_full && play_board[e] == "") {
-  play_board[e] = player;
-  game_loop();
-  addComputerMove();
+  const block = document.querySelector(`#block_${random_idx}`);
+  block.innerText = computer;
+  block.classList.ass("occupied);
+
+  check_for_winner();
+  setTimeout(computer_turn, 400);
  }
 };
 
-const addComputerMove = () => {
- if (!board_full) {
-  do {
-   selected = Math.floor(Math.random() * 9);
-  } while (play_board[selected] != "");
-  play_board[selected] = computer;
-  game_loop();
+play_board.forEach((_, index) => {
+ const block = document.querySelector(`#block_${index}`);
+ if (block) {
+  block.addEventListener("click", () => player_click(index));
  }
-};
+});
 
-const rest_board = () => {
- play_board = ["", "", "", "", "", "", "", "", ""];
- board_full = false;
- winner.classList.remove("playerWin");
- winner.classList.remove("computerWin");
- winner.classList.remove("draw");
- winner.innerText = "";
- render_board();
-};
-
-//initial render
-render_board();
                          
                          
