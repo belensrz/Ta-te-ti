@@ -81,7 +81,7 @@ const check_for_winner = () => {
 };
 
 const player_click = (index) => {
- if (player_board[index] === "" && !board_full) {
+ if (play_board[index] === "" && !board_full) {
   play_board[index] = player;
 
   const block = document.querySelector(`#block_${index}`);
