@@ -94,7 +94,7 @@ const computer_turn = () => {
 
   const block = document.querySelector(`#block_${random_idx}`);
   block.innerText = computer;
-  block.classList.ass("occupied);
+  block.classList.ass("occupied");
 
   check_for_winner();
   setTimeout(computer_turn, 400);
