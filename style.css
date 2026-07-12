@@ -46,6 +46,7 @@ h2 {
   font-size: 3rem;
   font-weight: bold;
   border: 3px solid pink;
+  color: #333333;
   transition: background 0.2s ease-in-out;
 }
 
