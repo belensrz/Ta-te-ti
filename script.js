@@ -104,7 +104,7 @@ const computer_turn = () => {
  });
 
  if (empty_cells.length > 0) {
-  const random_idx = empty_cells[Math.floor(Math.random() * empty_cells.lenght)];
+  const random_idx = empty_cells[Math.floor(Math.random() * empty_cells.length)];
   play_board[random_idx] = computer;
 
   const block = document.querySelector(`#block_${random_idx}`);
